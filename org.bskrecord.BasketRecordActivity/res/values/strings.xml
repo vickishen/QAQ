@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, BasketRecordActivity!</string>
+    <string name="app_name">BasketRecord</string>
+    <string name="New">New Record!!</string>
+    <string name="name">Input name/no:</string>
+    <string name="next"><u>Next</u></string>
+	<string name="data">Data</string>
+	<string name="empty">No data in the database!!</string>
+	<string name="old">to OLD!</string>
+	<string name="test">TEST</string>
+	<string name="win">W</string>
+	<string name="create">Create</string>
+	<string name="printname">Name: </string>
+	<string name="printnumber">Number: </string>
+	<string name="insert">Insert</string>
+	<string name="finishInsert">finish insert!!</string>
+	<string name="buttonname1">Player Name</string>
+    <string name="buttonname2">沿用</string>
+</resources>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/TableLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+    <TextView android:id="@+id/inprintName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="@string/printname"
+        />
+    <EditText android:id="@+id/inplayerName"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        />
+    </LinearLayout>
+ 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+    <TextView android:id="@+id/inprintNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="@string/printnumber"
+        />
+    <EditText android:id="@+id/inplayerNumber"
+        android:layout_width="155dp"
+        android:layout_height="wrap_content"
+        />
+    </LinearLayout>
+        <LinearLayout android:garvity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center">
+            
+        <Button android:id="@+id/insertBtn"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:text="@string/insert"
+        android:onClick="insertCall"
+        android:layout_marginRight="30dp"/>
+        <Button android:id="@+id/todbBtn"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:text="@string/finishInsert"
+        android:onClick="todbCall"/>
+        </LinearLayout>
+
+</LinearLayout>

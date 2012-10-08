@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/TableRow1"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+    android:background="@drawable/list">
+
+    <TextView
+        android:id="@+id/txt1"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:gravity="center" 
+        android:textSize="24dp"
+        android:text="2012/10/05"/>
+
+    <TextView
+        android:id="@+id/txt2"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="24dp"
+        android:text="淡江資管"/>
+
+    <TextView
+        android:id="@+id/txt4"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="100:100"
+        android:textSize="24dp"
+         />
+
+</TableRow>
