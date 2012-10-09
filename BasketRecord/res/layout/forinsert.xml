@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/TableLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+  <TableRow android:id="@+id/row3"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+    <TextView android:id="@+id/inprintName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_weight="1"
+        android:text="@string/printname"
+        />
+    <EditText android:id="@+id/inplayerName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        />
+    </TableRow>
+     <TableRow android:id="@+id/row4"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+    <TextView android:id="@+id/inprintNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_weight="1"
+        android:text="@string/printnumber"
+        />
+    <EditText android:id="@+id/inplayerNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        />
+    </TableRow >
+    
+    <TableRow android:id="@+id/row5"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+        <Button android:id="@+id/insertBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/insert"
+        android:onClick="insertCall"/>
+        <Button android:id="@+id/todbBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/finishInsert"
+        android:onClick="todbCall"/>
+    </TableRow>
+
+</TableLayout>

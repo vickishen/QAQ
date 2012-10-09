@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="280dp"
+    android:layout_height="match_parent" 
+    android:layout_gravity="center_horizontal">
+    
+   <TableRow>
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="球賽資料"
+           android:textSize="20sp" />
+
+   </TableRow>
+   <TableRow >
+		<LinearLayout >
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text=" 日期:" />
+
+       <EditText
+           android:id="@+id/date"
+           android:layout_width="200dp"
+           android:layout_height="wrap_content"
+           android:ems="10" >
+
+           <requestFocus />
+       </EditText>
+		</LinearLayout>
+   </TableRow>
+   <TableRow>
+        
+   </TableRow>
+   <TableRow> 
+        <LinearLayout>
+        <TextView android:text=" 對手:"
+            	  android:layout_width="wrap_content"
+            	  android:layout_height="wrap_content"/>
+
+        <EditText android:id="@+id/oppname" 
+            	  android:layout_width="200dp"
+            	  android:layout_height="wrap_content"/>
+		</LinearLayout>	
+	</TableRow>
+	
+  	<TableRow>
+  	    <LinearLayout>
+        <TextView android:text=" 紀錄人:"
+            	  android:layout_width="wrap_content"
+            	  android:layout_height="wrap_content"/>
+
+        <EditText android:id="@+id/recorder" 
+            	  android:layout_width="200dp"
+            	  android:layout_height="wrap_content"/>
+		</LinearLayout>	
+	</TableRow>
+
+  	<Button
+  	    android:id="@+id/infoset"
+  	    android:layout_width="wrap_content"
+  	    android:layout_height="wrap_content"
+  	    
+  	    android:onClick="sendinfo"
+  	    android:text="增加" />
+
+</TableLayout>

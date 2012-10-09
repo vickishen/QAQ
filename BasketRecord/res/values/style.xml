@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<style name="styleForDate">
+	    <item name="android:layout_width">fill_parent</item>
+	    <item name="android:layout_height">40dp</item>
+	    <item name="android:textSize">16sp</item>
+	    <item name="android:textColor">#00FFFF</item>
+	    <item name="android:background">#FFFFFF</item>
+	</style>    
+	<style name="styleForRecordname">
+	    <item name="android:layout_width">match_parent</item>
+	    <item name="android:layout_height">40dp</item>
+	    <item name="android:textSize">18sp</item>
+	    <item name="android:textColor">#FFFFFF</item>
+	    <item name="android:background">@drawable/txt</item>
+	</style>
+	<style name="styleForName">
+	    <item name="android:layout_width">200dp</item>
+	    <item name="android:layout_height">40dp</item>
+	    <item name="android:textSize">30sp</item>
+	    <item name="android:textColor">#FFFFFF</item>
+	    <item name="android:background">@drawable/txt</item>
+	</style>
+	<style name="styleForWin">
+	    <item name="android:layout_width">match_parent</item>
+	    <item name="android:layout_height">40dp</item>
+	    <item name="android:textSize">22sp</item>
+	    <item name="android:textColor">#FF0000</item>
+	    <item name="android:background">#FFFFFF</item>
+	</style>
+	<style name="styleForRecordPerson">
+	    <item name="android:layout_width">match_parent</item>
+	    <item name="android:layout_height">40dp</item>
+	    <item name="android:textColor">#FF0000</item>
+	    <item name="android:textSize">24sp</item>
+	    
+	</style>
+	<style name="styleForData">
+	    <item name="android:layout_width">70dp</item>
+	    <item name="android:layout_height">wrap_content</item>
+	    <item name="android:textColor">#FFFFFF</item>
+	    <item name="android:textSize">20sp</item>
+	    <item name="android:background">#000000</item>
+	</style>
+</resources>
