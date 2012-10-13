@@ -83,6 +83,22 @@ public class Useold extends Activity{
 		startActivity(toRecord);
 		Useold.this.finish();
 	}
+	public void newPlayer(View v){
+		EditText playername = (EditText)findViewById(R.id.playerName);
+		EditText playernum = (EditText)findViewById(R.id.playerNumber);
+		UseoldFragment data = (UseoldFragment)getFragmentManager().findFragmentById(R.id.master);
+		if(data.i<15){
+			data.namearr[data.i]=playername.getText().toString();
+			data.numarr[data.i]=playernum.getText().toString();
+			playername.setText("");
+			playernum.setText("");
+			data.i=data.i+1;
+			data.updatelist(data.i);
+		}
+		else{
+			Toast.makeText(Useold.this, "超過人數上限!!", Toast.LENGTH_LONG).show();
+		}
+	}
 }	
 	
 	
