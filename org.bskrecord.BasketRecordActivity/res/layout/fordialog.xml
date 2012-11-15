@@ -3,23 +3,31 @@
     android:id="@+id/TableLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent" 
-    android:orientation="vertical">
-  <LinearLayout android:id="@+id/row1"
+    android:orientation="vertical"
+    android:layout_marginLeft="15dp">
+
+  <TableLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" >
+
+  <TableRow android:id="@+id/row1"
       android:layout_width="match_parent"
       android:layout_height="wrap_content">
     <TextView android:id="@+id/printName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18sp"
+        android:gravity="center"
+        android:layout_weight="1"
         android:text="@string/printname"
         />
     <EditText android:id="@+id/playerName"
-        android:layout_width="170dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        />
-    </LinearLayout>
+        android:layout_weight="5"/>
+    </TableRow>
 
-  <LinearLayout
+  <TableRow
       android:id="@+id/row2"
       android:layout_width="match_parent"
       android:layout_height="wrap_content" >
@@ -29,32 +37,40 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="@string/printnumber"
+          android:gravity="center"
+          android:layout_weight="1" 
           android:textSize="18sp" />
 
       <EditText
           android:id="@+id/playerNumber"
-          android:layout_width="155dp"
-          android:layout_height="wrap_content"/>
-  </LinearLayout>
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_weight="5"/>
+  </TableRow>
+  
 
-    <LinearLayout android:id="@+id/row3"
+    <TableRow android:id="@+id/row3"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:gravity="center"
       android:layout_marginTop="10dp">
-        <Button android:id="@+id/change"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="修改"
-            android:layout_marginRight="50dp"
-            />
 
         <Button
             android:id="@+id/newplayer"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="newPlayer"
+            android:layout_weight="1"
             android:text="新增"/>
-    </LinearLayout>
+        <Button android:id="@+id/change"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="revise"
+            android:text="刪除"
+            android:layout_weight="1"
+            />
+    </TableRow>
+    </TableLayout>
 
     
         <Button android:id="@+id/start"
@@ -62,6 +78,7 @@
             android:layout_marginTop="100dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="togame"
             android:text="game start"
             android:layout_gravity="right"/>
 	

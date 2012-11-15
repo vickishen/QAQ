@@ -7,28 +7,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" 
-    android:gravity="center">
+    android:gravity="center"
+    android:layout_margin="5dp">
 	<LinearLayout android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
+	    android:layout_height="110dp"
 	    android:orientation="horizontal"
 	    android:gravity="center">
         <TableLayout 
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
-		    android:layout_weight="15"
-		    >
-			
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" 
-                android:gravity="center">
-				<TextView android:id="@+id/clock"
-				    android:layout_width="wrap_content"
-				    android:layout_height="wrap_content"
-				    android:text="10:00"/>
+		    android:layout_weight="15">
 		    
-			</TableRow>
-
 			<TableRow
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content" 
@@ -46,7 +35,7 @@
 		</TableLayout>
         <TableLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
+            android:layout_height="match_parent" 
             android:gravity="center"
             android:background="@drawable/txt">
 
@@ -112,35 +101,39 @@
 
 		<TableLayout
 		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content" 
-		    android:layout_weight="10">
+		    android:layout_height="match_parent" 
+		    android:layout_weight="10"
+		    android:background="@drawable/txt">
 
 		    <TableRow android:layout_width="match_parent"
 		    	  android:layout_height="match_parent"
-		    	  android:background="@drawable/txt"
 		    	  android:gravity="center">
-
 		    	<TextView
+		    	    android:layout_marginTop="3dp"
 		        android:id="@+id/ourteamname"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:layout_gravity="center"
+		        android:textSize="16sp"
 		        android:text="A" />
 
 		     	<TextView
-		         android:id="@+id/ourteamname"
+		     	    android:layout_marginTop="3dp"
+		         android:id="@+id/oppteamname"
 		         android:layout_width="match_parent"
 		         android:layout_height="wrap_content"
 		         android:layout_gravity="center"
+		         android:textSize="16sp"
 		         android:text="B" />
 
 			</TableRow>		
 		    	  
 			<TableRow
 		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content" 
-		    android:background="@drawable/mainpage1"
-		    android:gravity="center">
+		    android:layout_height="match_parent" 
+		    android:gravity="center"
+		    android:layout_marginTop="6dp"
+		    android:background="#FFFFFF">
 		     	
 
 				<TextView
@@ -149,7 +142,8 @@
 		    	android:layout_height="80dp"
 		    	android:gravity="center"
 		    	android:text="24"
-		    	android:textSize="48sp" 
+		    	android:textSize="55sp" 
+		    	android:textColor="#CE0000"
 		    	/>
 		
 				<TextView
@@ -158,15 +152,15 @@
 		   		android:layout_height="80dp"
 		    	android:gravity="center"
 		    	android:text="25"
-		    	android:textSize="48sp" />
+		    	android:textColor="#CE0000"
+		    	android:textSize="55sp" />
 			</TableRow>
 		</TableLayout>
 
 		<TableLayout
 		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content" 
-		    android:background="@drawable/txt"
-		    android:layout_weight="1">
+		    android:layout_height="match_parent" 
+		    android:background="@drawable/txt">
 
 		    <TableRow
     	    android:layout_width="match_parent"
@@ -278,7 +272,8 @@
 <LinearLayout 
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center">
+    android:gravity="center"
+    android:layout_marginTop="10dp">
 
     <Button
         android:id="@+id/mainplayer1"
@@ -326,7 +321,8 @@
 
 </LinearLayout>
 <TableRow android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp">
     <Button
         android:id="@+id/addscore"
 		android:layout_width="wrap_content"

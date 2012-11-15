@@ -13,6 +13,7 @@ public class InsertName extends Activity {
 	String[] numberss = {"","","","","","","","","","","","","","","",""}; 
 	public int i = 0;
 	private SQLite QQ = null;
+	int style=1;
 	StringBuilder tableName = new StringBuilder("");
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,8 @@ public class InsertName extends Activity {
 			numberss[i] = number.getText().toString();
 			getArray.setView();
 			i++;
+			name.setText("");
+			number.setText("");
 			//Toast.makeText(InsertName.this, Integer.toString(i), Toast.LENGTH_LONG).show();
 			
 		}
@@ -44,6 +47,11 @@ public class InsertName extends Activity {
 	}
 	public void todbCall(View v){
 		todb();
+		Bundle getopp = this.getIntent().getExtras();
+		String opp="";
+		opp=getopp.getString("oppname");
+		Bundle getsty = this.getIntent().getExtras();
+		style=getsty.getInt("style");
 		Intent toRecord = new Intent();
 		Bundle table = new Bundle();
 		table.putString("table", tableName.toString());
@@ -52,6 +60,14 @@ public class InsertName extends Activity {
 		table.putInt("ofls", 0);
 		table.putInt("ourpts", 0);
 		table.putInt("opppts", 0);
+		table.putInt("style", style);
+		table.putInt("quater", 0);
+		int[] quaterp = new int[8];
+		for(int y =0;y<8;y++){
+			quaterp[y]=0;
+		}
+		table.putIntArray("qpoint", quaterp);
+		table.putString("oppname", opp);
 		toRecord.putExtras(table);
 		toRecord.setClass(InsertName.this, Recording.class);
 		startActivity(toRecord);

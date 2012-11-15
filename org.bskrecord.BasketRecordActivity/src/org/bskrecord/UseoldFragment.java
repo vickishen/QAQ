@@ -23,7 +23,10 @@ public class UseoldFragment extends ListFragment{
 	private ListView listView;
 	private  SimpleAdapter listItemAdapter; 
 	private String tableName ="";
-	int position;
+	String[] namearr = new String[16];
+	String[] numarr = new String[16];
+	int po=-1;
+	int i=0;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -33,13 +36,13 @@ public class UseoldFragment extends ListFragment{
 		super.onActivityCreated(savedInstanceState);
 		startView();
 		
-		setListAdapter(listItemAdapter);
+		
 		View detailFrame = getActivity().findViewById(R.id.detail);
 		if(savedInstanceState!=null){
-			position = savedInstanceState.getInt("position",0);
+			po = savedInstanceState.getInt("position",0);
 		}
 		getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-		getListView().setItemChecked(position, true);
+		getListView().setItemChecked(po, true);
 		//TextView playname = (TextView)v.findViewById(R.id.txtuu);
 		
 		//TextView playnumber = (TextView)v.findViewById(R.id.ttnum1);
@@ -61,20 +64,35 @@ public class UseoldFragment extends ListFragment{
 		dsa.put("number", "­I¸¹");
 		listItems.add(dsa);
 		player.moveToFirst();
+		
 		if(player.moveToFirst()){
 			while(!player.isAfterLast()){
 				String Name = player.getString(player.getColumnIndexOrThrow("name"));
 				String Number = player.getString(player.getColumnIndexOrThrow("number"));
-				HashMap<String, String> map = new HashMap<String, String>();
-				map.put("name1", Name);
-				map.put("number", Number);
-				listItems.add(map);
+				
+				namearr[i]=Name;
+				numarr[i]=Number;
+				i++;
+				
 				player.moveToNext();
 			}
+			
 			player.close();
 			XD.close();
 		}
+		updatelist(i);
+		
+	}
+	public void updatelist(int d){
+		listItems = new ArrayList<HashMap<String, String>>();
+		for(int j=0;j<d;j++){
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("name1", namearr[j]);
+			map.put("number", numarr[j]);
+			listItems.add(map);
+		}
 		listItemAdapter = new SimpleAdapter(getActivity(),listItems,R.layout.listname,new String []{"name1","number"},new int [] {R.id.txtuu,R.id.ttnum1});
+		setListAdapter(listItemAdapter);
 	}
 	@Override
 	public void onListItemClick(ListView l,View v,int position,long id){
@@ -88,6 +106,8 @@ public class UseoldFragment extends ListFragment{
 		TextView playnumber = (TextView)v.findViewById(R.id.ttnum1);
 		
 		String name = playname.getText().toString();
+		String name2 = "";
+		String number2 = ""; 
 		String number = playnumber.getText().toString();
 		DetailFragment detailFragment = (DetailFragment) getFragmentManager().findFragmentById(R.id.detail);
 		if(detailFragment ==null){
@@ -96,6 +116,7 @@ public class UseoldFragment extends ListFragment{
 		if(detailFragment!=null){
 			detailFragment.setname(name);
 			detailFragment.setnumber(number);
+			po=position;
 		}
 		
 		/*EditText playername = (EditText)detailFragment.findViewById(R.id.playerName);

@@ -5,64 +5,67 @@
     android:layout_height="match_parent" 
     android:layout_gravity="center_horizontal">
     
-   <TableRow>
+
 
        <TextView
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:text="球賽資料"
-           android:textSize="20sp" />
+           android:textSize="30sp" 
+           android:gravity="center_horizontal"/>
 
-   </TableRow>
-   <TableRow >
-		<LinearLayout >
+   <TableRow android:layout_marginTop="15dp">
        <TextView
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:text=" 日期:" />
+           android:text=" 日期:"
+           android:textSize="18sp" 
+           android:layout_weight="10"/>
 
        <EditText
            android:id="@+id/date"
-           android:layout_width="200dp"
+           android:layout_width="220dp"
            android:layout_height="wrap_content"
-           android:ems="10" >
-
-           <requestFocus />
+           android:layout_weight="1">
        </EditText>
-		</LinearLayout>
    </TableRow>
    <TableRow>
         
    </TableRow>
    <TableRow> 
-        <LinearLayout>
         <TextView android:text=" 對手:"
             	  android:layout_width="wrap_content"
-            	  android:layout_height="wrap_content"/>
+            	  android:layout_height="wrap_content"
+            	  android:textSize="18sp" 
+            	  android:layout_weight="10"/>
 
         <EditText android:id="@+id/oppname" 
-            	  android:layout_width="200dp"
-            	  android:layout_height="wrap_content"/>
-		</LinearLayout>	
+            	  android:layout_width="220dp"
+            	  android:layout_height="wrap_content"
+            	  android:layout_weight="1"/>
 	</TableRow>
 	
   	<TableRow>
-  	    <LinearLayout>
-        <TextView android:text=" 紀錄人:"
+
+        <TextView android:text=" 紀錄:"
             	  android:layout_width="wrap_content"
-            	  android:layout_height="wrap_content"/>
+            	  android:layout_height="wrap_content"
+            	  android:layout_weight="10"
+            	  android:textSize="18sp" />
 
         <EditText android:id="@+id/recorder" 
-            	  android:layout_width="200dp"
-            	  android:layout_height="wrap_content"/>
-		</LinearLayout>	
+            	  android:layout_width="220dp"
+            	  android:layout_height="wrap_content"
+            	  android:layout_weight="1"/>
+
 	</TableRow>
 
   	<Button
+  	    android:layout_marginTop="15dp"
   	    android:id="@+id/infoset"
   	    android:layout_width="wrap_content"
   	    android:layout_height="wrap_content"
-  	    
+  	    android:textSize="18sp" 
   	    android:onClick="sendinfo"
   	    android:text="增加" />
 

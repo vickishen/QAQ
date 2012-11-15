@@ -69,6 +69,9 @@ public class BasketRecordActivity extends Activity {
     }*/
     public void getNew(View v){
     	Intent haha = new Intent();
+    	Bundle forsty = new Bundle();
+    	forsty.putInt("style", 1);
+    	haha.putExtras(forsty);
     	haha.setClass(BasketRecordActivity.this, Mainmenu.class);
     	startActivity(haha);
     	/*setContentView(R.layout.second);

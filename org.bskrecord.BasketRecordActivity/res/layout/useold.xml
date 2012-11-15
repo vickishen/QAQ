@@ -4,21 +4,23 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="horizontal"
-    android:background="#000000" >
+    android:background="#000000" 
+     android:layout_margin="5dp">
 
-    <fragment 
+    <fragment
         android:id="@+id/master"
         android:layout_width="0px"
         android:layout_height="match_parent"
-        android:layout_weight="2"
-        class="org.bskrecord.UseoldFragment"/>
+        android:layout_weight="7"
+        class="org.bskrecord.UseoldFragment" />
 
     <fragment
         android:id="@+id/detail"
         android:layout_width="0px"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="6"
+        android:layout_marginLeft="15dp"
         class="org.bskrecord.DetailFragment"
         android:background="?android:attr/detailsElementBackground" />
-
+    
 </LinearLayout>

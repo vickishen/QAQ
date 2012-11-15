@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -38,9 +39,12 @@ public class Recording extends Activity {
 	int point = 0;
 	int selffl = 0,oppfl = 0;
 	int opppts = 0,ourpts=0;
-	int step=0;
+	int step=0,style=1;
 	String str = "";
 	String table = "";
+	int shit=0;
+	int quater=0;
+	int[] qpoint=new int[8];
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -55,6 +59,13 @@ public class Recording extends Activity {
 		oppfl = getname.getInt("ofls");
 		ourpts = getname.getInt("ourpts");
 		opppts = getname.getInt("opppts");
+		style = getname.getInt("style");
+		quater = getname.getInt("quater");
+		qpoint = getname.getIntArray("qpoint");
+		qpoint = getname.getIntArray("apoint");
+		String oppname = getname.getString("oppname");
+		TextView opp = (TextView)findViewById(R.id.oppteamname);
+		opp.setText(oppname);
 		String[] columns = {"number"};
 		DisplayMetrics dm = getResources().getDisplayMetrics();
         final int screenWidth = dm.widthPixels;  
@@ -67,12 +78,13 @@ public class Recording extends Activity {
 		for(int i=0;i<5;i++){
 			int getmName = getResources().getIdentifier("mainplayer"+(i+1), "id", getPackageName());
 			mBtn[i] = (Button)findViewById(getmName);
+			setback(mBtn[i],style);
 			mNum[i] = fullNum[i];
 			//mNum[i] = c.getString(numIndex);
 			mBtn[i].setText(mNum[i]);
 			//c.moveToNext();
 		}
-		for(int j=0;j<10;j++){
+		for(int j=0;j<(fullNum.length-5);j++){
 			/*int getbName = getResources().getIdentifier("benchplayer"+(j+1), "id", getPackageName());
 			bBtn[j] = (Button)findViewById(getbName);*/
 			//if(!c.isAfterLast()){
@@ -100,7 +112,38 @@ public class Recording extends Activity {
 	             return df;  
 			}
 		});*/
-		
+		/*long min = 600000;
+		final TextView clock = (TextView)findViewById(R.id.clock);
+		final CountDownTimer time = new CountDownTimer(min,1000) {
+
+		     public void onTick(long millisUntilFinished) {
+		    	 long min= (millisUntilFinished/1000)/60;
+		    	 long sec= (millisUntilFinished/1000)%60;
+		         clock.setText(min+":"+String.format("%0s", sec));
+		     }
+
+		     public void onFinish() {
+		         clock.setText("00:00");
+		     }
+		     public void stop(){
+		    	 
+		     }
+		  };
+		  clock.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if((shit%2)==0){
+					time.start();
+					shit++;
+				}
+				else{
+					time.stop();
+				}
+				
+			}
+		});*/
         	
 		
         
@@ -335,6 +378,26 @@ public class Recording extends Activity {
 		v.setClickable(true);
 		toBtnpage(mNum[4]);
 	}*/
+	public void setback(Button bu,int style){
+		switch(style){
+		case 1:
+			bu.setBackgroundResource(R.drawable.blueplayer);
+			break;
+		case 2:
+			bu.setBackgroundResource(R.drawable.redplayer);
+			break;
+		case 3:
+			bu.setBackgroundResource(R.drawable.greenplayer);
+			break;
+		case 4:
+			bu.setBackgroundResource(R.drawable.whiteplayer);
+			break;
+		case 5:
+			bu.setBackgroundResource(R.drawable.orangeplayer);
+			break;
+			
+		}
+	}
 	public void undo(View v){
 		if(step==1){
 			opppts--;
@@ -378,23 +441,40 @@ public class Recording extends Activity {
         Bundle tname = new Bundle();
         tname.putString("Tablename", table);
         toIndata.putExtras(tname);
-        toIndata.setClass(Recording.this, Indata.class);
+        toIndata.setClass(Recording.this,Indata.class);
+        startActivity(toIndata);
         Recording.this.finish();
         //c.moveToFirst();
 	}
 	public void bfouladd(View v){
+		if(oppfl<5){
 		oppfl++;
 		step=5;
+		}
 		getbfoul(oppfl);
 	}
 	public void afouladd(View v){
+		if(selffl<5){
 		selffl++;
 		step=4;
+		}
 		getafoul(selffl);
 	}
 	public void endquater(View v){
 		oppfl=0;
 		selffl=0;
+		TextView wepts = (TextView)findViewById(R.id.ourscore);
+		TextView oppts = (TextView)findViewById(R.id.oppscore);
+		if(quater==0){
+			
+			qpoint[0]=Integer.parseInt(wepts.getText().toString());
+			qpoint[1]=Integer.parseInt(oppts.getText().toString());
+		}
+		else{
+			qpoint[quater*2]=Integer.parseInt(wepts.getText().toString())-qpoint[(quater-1)*2];
+			qpoint[quater*2+1]=Integer.parseInt(oppts.getText().toString())-qpoint[(quater-1)*2+1];
+		}
+		quater++;
 		getafoul(selffl);
 		getbfoul(oppfl);
 	}
@@ -459,10 +539,8 @@ public class Recording extends Activity {
 		showopts(opppts);
 	}
 	public void addtw(View v){
-		if(opppts>0){
 		opppts+=2;
 		step=2;
-		}
 		showopts(opppts);
 	}
 	public void addthr(View v){
@@ -485,6 +563,7 @@ public class Recording extends Activity {
 		getData.putInt("sfls", selffl);
 		getData.putInt("ofls", oppfl);
 		getData.putInt("opppts", opppts);
+		getData.putInt("style", style);
 		//getData.putStringArray("mNum", mNum);
 		//getData.putStringArray("bNum", bNum);
 		btnpg.putExtras(getData);

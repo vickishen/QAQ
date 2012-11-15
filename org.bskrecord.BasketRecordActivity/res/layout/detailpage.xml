@@ -15,16 +15,14 @@
             android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:layout_marginLeft="30dp"
-		    android:layout_marginTop="15dp"
+		    android:layout_marginTop="10dp"
 		    android:textSize="32dp"
 		    android:text="8 童盈超"/>
 
         <TableLayout android:layout_width="wrap_content"
             android:layout_height="wrap_content" 
             android:gravity="center"
-            android:layout_marginLeft="160dp"
-            android:layout_marginTop="5dp"
-            >
+            android:layout_marginLeft="160dp">
             <TableRow android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/txt">
@@ -68,20 +66,16 @@
         		android:layout_height="wrap_content"
         		android:layout_marginLeft="5dp"
         		android:layout_weight="1">
-                <TableRow 
-                    android:layout_width="match_parent"
-        			android:layout_height="wrap_content"                        
-        			android:gravity="center">
-
+                
                     <TextView
                         android:id="@+id/Twop"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="兩分球"
+                        android:gravity="center"
                         android:layout_marginLeft="5dp"
                         android:textSize="20dp" />
 
-                </TableRow>
                 <TableRow 
                     android:layout_width="match_parent"
         			android:layout_height="wrap_content"
@@ -89,7 +83,6 @@
                     <Button 
                         android:id="@+id/btnTwopIn"
                         android:onClick="bfuncTwopIn"
-                        android:layout_width="match_parent"
                         android:layout_weight="1"
                         android:text="O"/>
                     <Button 
@@ -101,15 +94,10 @@
                               
             </TableLayout>
             <TableLayout 
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
         		android:layout_height="wrap_content"
         		android:layout_marginLeft="5dp"
         		android:layout_weight="1">
-
-                <TableRow 
-                    android:layout_width="match_parent"
-        			android:layout_height="wrap_content"
-        			android:gravity="center">
                     <TextView
                         android:id="@+id/Threep"
                         android:gravity="center"
@@ -118,9 +106,8 @@
                         android:textSize="20dp"
                         android:layout_marginLeft="5dp"
                         android:text="三分球"/>
-                </TableRow>
                 <TableRow
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content" >
 
                     <Button
@@ -137,24 +124,20 @@
                 </TableRow>                       
             </TableLayout>
             <TableLayout 
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
         		android:layout_height="wrap_content"
         		android:layout_marginLeft="5dp"
-        		android:layout_weight="1">
-                <TableRow 
-                    android:layout_width="match_parent"
-        			android:layout_height="wrap_content"
-                    android:gravity="center" >
+        		android:layout_weight="1"
+        		android:layout_marginRight="5dp">
                     <TextView
                         android:id="@+id/Freethrow"
                         android:gravity="center"
                         android:textSize="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="罰球"/>
-                </TableRow>   
+                        android:text="罰球"/> 
                 <TableRow 
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
         			android:layout_height="wrap_content">
                     <Button 
                         android:id="@+id/btnFreethrowIn"
@@ -174,7 +157,9 @@
         
         <TableRow 
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp">
              <Button 
                 android:id="@+id/btnReb"
                 android:text="籃板"
@@ -197,7 +182,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
         </TableRow>
-        <TableRow>
+        <TableRow android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp">
              <Button 
                 android:id="@+id/btnBlk"
                 android:text="阻攻"

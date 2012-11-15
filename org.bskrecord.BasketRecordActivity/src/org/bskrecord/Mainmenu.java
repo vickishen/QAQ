@@ -15,7 +15,9 @@ public class Mainmenu extends Activity{
 		
 		Intent add = new Intent();
 		Bundle set = new Bundle();
+		Bundle getsty = this.getIntent().getExtras();
 		set.putInt("judge", 0);
+		set.putInt("style", getsty.getInt("style"));
 		add.putExtras(set);
 		add.setClass(Mainmenu.this, Information.class);
 		startActivity(add);
@@ -25,6 +27,8 @@ public class Mainmenu extends Activity{
 		Intent add = new Intent();
 		Bundle set = new Bundle();
 		set.putInt("judge", 1);
+		Bundle getsty = this.getIntent().getExtras();
+		set.putInt("style", getsty.getInt("style"));
 		add.putExtras(set);
 		add.setClass(Mainmenu.this, Information.class);
 		startActivity(add);

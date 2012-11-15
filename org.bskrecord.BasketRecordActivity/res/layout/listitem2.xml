@@ -9,7 +9,7 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="NAME/NUMBER"
+        
         android:textSize="18dp" 
         android:background="@drawable/txt1"/>
 
@@ -18,7 +18,7 @@
         android:layout_width="55dp"
         android:layout_height="wrap_content"
         android:gravity="center" 
-        android:text="得分"
+        
         android:textSize="18dp" 
         android:background="@drawable/txt1"/>
 
@@ -70,7 +70,7 @@
      <TextView
         android:id="@+id/txt15"
         android:textSize="18dp" 
-        android:layout_width="125dp"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:background="@drawable/txt1" />
@@ -78,39 +78,37 @@
     <TextView
         android:id="@+id/txt16"
         android:textSize="18dp" 
-        android:layout_width="60dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:background="@drawable/txt1" />
      <TextView
         android:id="@+id/txt17"
         android:textSize="18dp" 
-       android:layout_width="125dp"
+       android:layout_width="140dp"
         android:layout_height="wrap_content"
-       android:text="兩分中/兩分出手"
        android:gravity="center"
        android:background="@drawable/txt1"/>
 
     <TextView
         android:id="@+id/txt18"
         android:textSize="18dp" 
-        android:layout_width="80dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="命中率(%)"
         android:background="@drawable/txt1"/>
 
     <TextView
         android:id="@+id/txt19"
         android:textSize="18dp" 
-        android:layout_width="125dp"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:background="@drawable/txt1" />
      <TextView
         android:id="@+id/txt20"
         android:textSize="18dp" 
-        android:layout_width="80dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:background="@drawable/txt1"

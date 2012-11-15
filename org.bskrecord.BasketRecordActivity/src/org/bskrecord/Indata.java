@@ -3,6 +3,7 @@ package org.bskrecord;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -121,9 +122,9 @@ public class Indata extends ListActivity{
 	            map.put("txt15", Integer.toString(twoMd)+"/"+Integer.toString(twoAp));
 	            map.put("txt16", calculus(twoMd,twoAp)+" %");
 	            map.put("txt17", Integer.toString(threeMd)+"/"+Integer.toString(threeAp));
-	            map.put("txt18", calculus(threeMd,threeAp)+" #");
+	            map.put("txt18", calculus(threeMd,threeAp)+" %");
 	            map.put("txt19", Integer.toString(freeMd)+"/"+Integer.toString(freeAp));
-	            map.put("txt20", calculus(freeMd,freeAp)+" &");
+	            map.put("txt20", calculus(freeMd,freeAp)+" %");
 	            String[] aline ={"","","","","","","","","","","","","",""};
 	            aline[0]=String.format("%10s "+"/"+" %2s", name,number);
 	            aline[1]=String.format(" %3d", pts);
@@ -159,13 +160,14 @@ public class Indata extends ListActivity{
 		
 	}
 	public String calculus(int md,int ap){
+		DecimalFormat mformat =new DecimalFormat("#0.0");
 		if(ap == 0){
 			String no = "0";
 			return no;
 		}
 		else{
-			float res = (float)(md/ap);
-			String ans = Float.toString(res*100);
+			float res = ((float)md/(float)ap);
+			String ans = mformat.format(res*100);
 			return ans;
 		}
 	}

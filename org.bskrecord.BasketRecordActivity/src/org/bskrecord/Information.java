@@ -13,13 +13,14 @@ public class Information extends Activity{
 	private int Nmonth;
 	private int Nday;
 	private int Nyear;
-	int judge=0;
+	int judge=0,style;
 	@Override 
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.information);
 		Bundle get = this.getIntent().getExtras();
 		judge=get.getInt("judge");
+		style=get.getInt("style");
 		showView();
 	}
 	public void showView(){
@@ -39,6 +40,7 @@ public class Information extends Activity{
 		infoForTb.putInt("year", Nyear);
 		infoForTb.putInt("month", Nmonth+1);
 		infoForTb.putInt("day", Nday);
+		infoForTb.putInt("style", style);
 		Intent toName = new Intent();
 		toName.putExtras(infoForTb);
 		if(judge==0){

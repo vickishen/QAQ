@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -29,6 +31,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.DialogInterface;
 
 public class OldData extends ListActivity {
 	private  ArrayList<HashMap<String, String>> listItems;
@@ -44,6 +47,130 @@ public class OldData extends ListActivity {
         setContentView(R.layout.secondhalf);
         initListView();
         this .setListAdapter(listItemAdapter);
+        listView = getListView();
+        listView.setOnItemLongClickListener(new OnItemLongClickListener(){
+			@SuppressWarnings("deprecation")
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				// TODO A
+				Toast.makeText(OldData.this, "work!!", Toast.LENGTH_LONG).show();
+				final StringBuilder table = new StringBuilder("");
+				String opp =((TextView)arg1.findViewById(R.id.txt2)).getText().toString();
+				final String time = ((TextView)arg1.findViewById(R.id.txt1)).getText().toString();
+				table.append(opp);
+				//AlertDialog dialog = new AlertDialog.Builder(OldData.this).create();
+				new AlertDialog.Builder(OldData.this).setTitle("刪除記錄").setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						//SQLite data3 = new SQLite(Useold.this,"data",null,1);
+						//SQLiteDatabase XP = data3.getWritableDatabase();
+						//ContentValues values = new ContentValues();
+						//EditText secondName = (EditText)dialogView.findViewById(R.id.playerName);
+						
+						//values.put("name",secondName.getText().toString() );
+						//int change = XP.update(tableName, values, "name"+"= '"+data+"'", null);
+						//SQLite data3 = new SQLite(OldData.this,"data",null,1);
+						//SQLiteDatabase XP = data3.getWritableDatabase();
+						
+						//XP.execSQL("DROP TABLE IF EXISTS "+table.toString());
+						/*if(deletedata==0){
+							Toast.makeText(OldData.this, "failed!", Toast.LENGTH_LONG).show();
+						}
+						else{
+							Toast.makeText(OldData.this, "success", Toast.LENGTH_LONG).show();
+						}*/
+						//XP.close();
+						//dialog.cancel();
+						int k=0,end=0,times=0,start=0;
+						char[] arr = time.toCharArray();
+						while(k<time.length()){
+							
+							if(arr[k]=='/'){
+								
+								if(times==0){
+									end=k;
+									for(int f=0;f<end;f++){
+										table.append(arr[f]);
+									}
+									times++;
+								}
+								else{
+									for(int f=end+1;f<k;f++){
+										table.append(arr[f]);
+									}
+									end=k;
+								}
+							}
+								k++;
+						}
+						for(int d=end+1;d<time.length();d++){
+							table.append(arr[d]);
+						}
+						SQLite QQ = new SQLite(OldData.this,"data",null,1);
+						SQLiteDatabase db = QQ.getWritableDatabase();
+						db.execSQL("DROP TABLE IF EXISTS "+table.toString());
+						initListView();
+						setListAdapter(listItemAdapter);
+					}
+				})
+				.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						dialog.cancel();
+					}
+				}).show();
+				
+				/*dialog.setTitle("刪除比賽記錄");
+				dialog.setMessage("刪除：\n"+"對手： "+opp+"\n日期： "+time+"\n");
+				dialog.setButton("確定刪除", new DialogInterface.OnClickListener(){
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						int k=0,end=0,times=0,start=0;
+						char[] arr = time.toCharArray();
+						while(k<time.length()){
+							
+							if(arr[k]=='/'){
+								
+								if(times==0){
+									end=k;
+									for(int f=0;f<end;f++){
+										table.append(arr[f]);
+									}
+									times++;
+								}
+								else{
+									for(int f=end+1;f<k;f++){
+										table.append(arr[f]);
+									}
+									end=k;
+								}
+							}
+								k++;
+						}
+						for(int d=end+1;d<time.length();d++){
+							table.append(arr[d]);
+						}
+						SQLite QQ = new SQLite(OldData.this,"data",null,1);
+						SQLiteDatabase db = QQ.getWritableDatabase();
+						db.delete(table.toString(), null, null);
+						initListView();
+						 //long del = arg0.getItemIdAtPosition(arg2);
+						//listItemAdapter.notifyDataSetChanged();
+						Toast.makeText(OldData.this, table.toString(), Toast.LENGTH_SHORT).show();
+					}
+					
+				});*/
+				
+				return true;
+			}
+        });
         
     }
 	 private  void  initListView() {   
@@ -52,8 +179,8 @@ public class OldData extends ListActivity {
 	        SQLiteDatabase DB = data.getWritableDatabase();
 	        Cursor c = DB.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
 	        
-	        if(c.moveToFirst()==false){
-        		Toast.makeText(OldData.this, "no old data", Toast.LENGTH_LONG);
+	        if(c==null){
+        		Toast.makeText(OldData.this, "no old data", Toast.LENGTH_LONG).show();
         		Intent it = new Intent();
        		 	it.setClass(OldData.this, BasketRecordActivity.class);
        		 	startActivity(it);
@@ -73,7 +200,7 @@ public class OldData extends ListActivity {
 					//name[i]=str;
 					Cursor cu = DB.query(str, new String [] {"oppname","day","month","year","opppts","selfpts"}, null, null, null, null, null);
 					cu.moveToFirst();
-					cu.moveToNext();
+					//cu.moveToNext();
 					//Log.d("OLDdataRecordname=", Integer.toString(indexRecordname));
 					String ing = cu.getString(cu.getColumnIndexOrThrow("oppname"));
 					String Month = Integer.toString(cu.getInt(cu.getColumnIndexOrThrow("month")));
@@ -94,6 +221,10 @@ public class OldData extends ListActivity {
 				c.close();
 				DB.close();
 			}
+	        else{
+	        	Toast.makeText(OldData.this, "fuckyou", Toast.LENGTH_SHORT);
+	        	onBackPressed();
+	        }
 	          
 	            	        //生成適配器的Item和動態數組對應的元素   
 	        listItemAdapter = new  SimpleAdapter( this ,listItems,    // listItems數據源    
@@ -116,6 +247,7 @@ public class OldData extends ListActivity {
 		 startActivity(InData);
 		 OldData.this.finish();
 	 }
+	 
 	 @Override
 	 public void onBackPressed(){
 		 Intent it = new Intent();
@@ -177,13 +309,13 @@ public class OldData extends ListActivity {
 	        String[] paths = {file.toString()};
 	        callMediaScanner(paths);
 		}*/
-	 private boolean isSDExist() { 
+	 /*private boolean isSDExist() { 
 			String state = Environment.getExternalStorageState();
 			
 			if (state.equals(Environment.MEDIA_MOUNTED))
 				return true;
 			else			
 				return false;		
-		}
+		}*/
 	 
 }

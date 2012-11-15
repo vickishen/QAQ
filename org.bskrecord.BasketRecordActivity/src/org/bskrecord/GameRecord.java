@@ -5,6 +5,9 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.gesture.GestureLibraries;
+import android.gesture.GestureLibrary;
+import android.gesture.GestureOverlayView;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
@@ -27,6 +30,8 @@ public class GameRecord extends Activity{
 	int twoap,twomd,threeap,threemd,freemd,freeap;
 	int rbs,asts,blks,tos,stls,fls,pts;
 	int sfls=0,oppfls=0;
+	int quater=0;
+	int[] qpoint = new int[8];
 	SQLite qq=null;
 	SQLiteDatabase data = null;
 	SQLiteDatabase data2 = null;
@@ -34,11 +39,17 @@ public class GameRecord extends Activity{
 	String num = "";
 	String[] Num = new String[16];
 	int teampts = 0,opppts=0;
-	int prestep = 0;
+	int prestep = 0,style=1;
+	GestureOverlayView gesture;
+	GestureLibrary gestureLibrary;
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.detailpage);
+		gestureLibrary = GestureLibraries.fromRawResource(this, R.raw.gestures);
+        if(!gestureLibrary.load()){
+        	goBack();
+        }
 		Bundle getdata = this.getIntent().getExtras();
 		DisplayMetrics dm = getResources().getDisplayMetrics();
         final int screenWidth = dm.widthPixels;  
@@ -46,6 +57,7 @@ public class GameRecord extends Activity{
         sfls=getdata.getInt("sfls");
         oppfls=getdata.getInt("ofls");
         Num=getdata.getStringArray("num");
+        style=getdata.getInt("style");
 		qq = new SQLite(GameRecord.this,"data",null,1);
 		data = qq.getWritableDatabase();
 		data2 = qq.getWritableDatabase();
@@ -53,6 +65,8 @@ public class GameRecord extends Activity{
 		num = getdata.getString("number");
 		teampts = getdata.getInt("ourpts");
 		opppts = getdata.getInt("opppts");
+		quater = getdata.getInt("quater");
+		qpoint = getdata.getIntArray("qpoint");
 		String[] column = {"selfpts","opppts"};
 		String selection = "number LIKE "+num;
 		team = data2.query(table, column, null, null, null, null, null);
@@ -267,9 +281,9 @@ public class GameRecord extends Activity{
 				teampts-=2;
 			}
 		}
-		ContentValues teamV = new ContentValues();
-		teamV.put(SQLite.SELFPTS, selfpt);
-		data2.update(table, teamV, null, null);
+		//ContentValues teamV = new ContentValues();
+		//teamV.put(SQLite.SELFPTS, selfpt);
+		//data2.update(table, teamV, null, null);
 		ContentValues values = new ContentValues();
 		values.put(SQLite.TWOAP, twoap);
 		values.put(SQLite.TWOMD, twomd);
@@ -487,7 +501,7 @@ public class GameRecord extends Activity{
 	}
 	public void bfuncFoulin(int flag){
 		Button fl = (Button)findViewById(R.id.btnFoul);
-		int fls = player.getInt(flIndex);
+		//int fls = player.getInt(flIndex);
 		if(flag==1){
 		fls++;
 		//sfls++;
@@ -500,10 +514,10 @@ public class GameRecord extends Activity{
 		}
 		Show2(fls,fl,"¥Ç³W");
 		if(fls==4){
-			Toast.makeText(GameRecord.this, "Wacth out!! 4th Personal Foul", Toast.LENGTH_SHORT);
+			 Toast.makeText(GameRecord.this, "Wacth out!! 4th Personal Foul", Toast.LENGTH_SHORT).show();
 		}
 		if(fls>5){
-			Toast.makeText(GameRecord.this, "already 5th Personal Foul", Toast.LENGTH_LONG);
+			Toast.makeText(GameRecord.this, "already 5th Personal Foul", Toast.LENGTH_LONG).show();
 			fls=5;
 		}
 		ContentValues values = new ContentValues();
@@ -516,44 +530,51 @@ public class GameRecord extends Activity{
 		switch(prestep){
 		case 1:
 			bfuncTwopInin(0);
+			prestep=0;
 			break;
 		case 2:
 			bfuncTwopOutin(0);
-			
+			prestep=0;
 			break;
 		case 3:
 			bfuncThreepInin(0);
-			
+			prestep=0;
 			break;
 		case 4:
 			bfuncThreepOutin(0);
-			
+			prestep=0;
 			break;
 		case 5:
 			bfuncFreethrowInin(0);
-			
+			prestep=0;
 			break;
 		case 6:
 			bfuncFreethrowOutin(0);
-			
+			prestep=0;
 			break;
 		case 7:
 			bfuncRebin(0);
+			prestep=0;
 			break;
 		case 8:
 			bfuncAstin(0);
+			prestep=0;
 			break;
 		case 9:
 			bfuncStlin(0);
+			prestep=0;
 			break;
 		case 10:
 			bfuncBlkin(0);
+			prestep=0;
 			break;
 		case 11:
 			bfuncToin(0);
+			prestep=0;
 			break;
 		case 12:
 			bfuncFoulin(0);
+			prestep=0;
 			break;
 		}
 		
@@ -567,6 +588,9 @@ public class GameRecord extends Activity{
 		tableback.putInt("ofls", oppfls);
 		tableback.putInt("ourpts", teampts);
 		tableback.putInt("opppts", opppts);
+		tableback.putInt("style", style);
+		tableback.putInt("quater", quater);
+		tableback.putIntArray("apoint", qpoint);
 		Intent back = new Intent();
 		back.putExtras(tableback);
 		back.setClass(GameRecord.this, Recording.class);
