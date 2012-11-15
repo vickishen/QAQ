@@ -55,6 +55,10 @@ public class Useold extends Activity{
 		//UseoldFragment getname = (UseoldFragment)find
 		UseoldFragment data = (UseoldFragment)getFragmentManager().findFragmentById(R.id.master);
 		int no=0;
+		String[] arr = {"","","","","","","","","","","","","","","",""}; 
+		for(int j=0;j<data.i;j++){
+			arr[j]=data.numarr[j];
+		}
 		Bundle getdata = this.getIntent().getExtras();
 		QQ = new SQLite(Useold.this,"data",null,1);
 		String oppname = getdata.getString("oppname");
@@ -65,19 +69,20 @@ public class Useold extends Activity{
 		int style = getdata.getInt("style");
 		tableName.append(oppname).append(year).append(month).append(day);
 		QQ.createTable(tableName.toString());
-		for(no=0;no<data.namearr.length;no++){
+		for(no=0;no<data.i;no++){
 			QQ.addplayer(data.namearr[no],data.numarr[no] , tableName.toString(), recorder, getdata.getInt("month"), getdata.getInt("day"),getdata.getInt("year"),oppname);
 		}
 		QQ.close();
 		Intent toRecord = new Intent();
 		Bundle table = new Bundle();
 		table.putString("table", tableName.toString());
-		table.putStringArray("num", data.numarr);
+		table.putStringArray("num", arr);
 		table.putInt("sfls", 0);
 		table.putInt("ofls", 0);
 		table.putInt("ourpts", 0);
 		table.putInt("opppts", 0);
 		table.putInt("style", style);
+		table.putString("oppname", oppname);
 		toRecord.putExtras(table);
 		toRecord.setClass(Useold.this, Recording.class);
 		startActivity(toRecord);
@@ -87,13 +92,16 @@ public class Useold extends Activity{
 		EditText playername = (EditText)findViewById(R.id.playerName);
 		EditText playernum = (EditText)findViewById(R.id.playerNumber);
 		UseoldFragment data = (UseoldFragment)getFragmentManager().findFragmentById(R.id.master);
-		if(data.i<15){
+		if(data.i<15&&playername.getText().toString().length()!=0){
 			data.namearr[data.i]=playername.getText().toString();
 			data.numarr[data.i]=playernum.getText().toString();
 			playername.setText("");
 			playernum.setText("");
 			data.i=data.i+1;
 			data.updatelist(data.i);
+		}
+		else if(playername.getText().toString().length()==0){
+			Toast.makeText(Useold.this, "請填入姓名!!", Toast.LENGTH_SHORT).show();
 		}
 		else{
 			Toast.makeText(Useold.this, "超過人數上限!!", Toast.LENGTH_LONG).show();

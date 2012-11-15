@@ -47,6 +47,9 @@ public class InsertName extends Activity {
 	}
 	public void todbCall(View v){
 		todb();
+		Bundle getopp = this.getIntent().getExtras();
+		String opp="";
+		opp=getopp.getString("oppname");
 		Bundle getsty = this.getIntent().getExtras();
 		style=getsty.getInt("style");
 		Intent toRecord = new Intent();
@@ -58,6 +61,13 @@ public class InsertName extends Activity {
 		table.putInt("ourpts", 0);
 		table.putInt("opppts", 0);
 		table.putInt("style", style);
+		table.putInt("quater", 0);
+		int[] quaterp = new int[8];
+		for(int y =0;y<8;y++){
+			quaterp[y]=0;
+		}
+		table.putIntArray("qpoint", quaterp);
+		table.putString("oppname", opp);
 		toRecord.putExtras(table);
 		toRecord.setClass(InsertName.this, Recording.class);
 		startActivity(toRecord);

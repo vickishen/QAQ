@@ -43,6 +43,8 @@ public class Recording extends Activity {
 	String str = "";
 	String table = "";
 	int shit=0;
+	int quater=0;
+	int[] qpoint=new int[8];
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -58,6 +60,12 @@ public class Recording extends Activity {
 		ourpts = getname.getInt("ourpts");
 		opppts = getname.getInt("opppts");
 		style = getname.getInt("style");
+		quater = getname.getInt("quater");
+		qpoint = getname.getIntArray("qpoint");
+		qpoint = getname.getIntArray("apoint");
+		String oppname = getname.getString("oppname");
+		TextView opp = (TextView)findViewById(R.id.oppteamname);
+		opp.setText(oppname);
 		String[] columns = {"number"};
 		DisplayMetrics dm = getResources().getDisplayMetrics();
         final int screenWidth = dm.widthPixels;  
@@ -76,7 +84,7 @@ public class Recording extends Activity {
 			mBtn[i].setText(mNum[i]);
 			//c.moveToNext();
 		}
-		for(int j=0;j<10;j++){
+		for(int j=0;j<(fullNum.length-5);j++){
 			/*int getbName = getResources().getIdentifier("benchplayer"+(j+1), "id", getPackageName());
 			bBtn[j] = (Button)findViewById(getbName);*/
 			//if(!c.isAfterLast()){
@@ -455,6 +463,18 @@ public class Recording extends Activity {
 	public void endquater(View v){
 		oppfl=0;
 		selffl=0;
+		TextView wepts = (TextView)findViewById(R.id.ourscore);
+		TextView oppts = (TextView)findViewById(R.id.oppscore);
+		if(quater==0){
+			
+			qpoint[0]=Integer.parseInt(wepts.getText().toString());
+			qpoint[1]=Integer.parseInt(oppts.getText().toString());
+		}
+		else{
+			qpoint[quater*2]=Integer.parseInt(wepts.getText().toString())-qpoint[(quater-1)*2];
+			qpoint[quater*2+1]=Integer.parseInt(oppts.getText().toString())-qpoint[(quater-1)*2+1];
+		}
+		quater++;
 		getafoul(selffl);
 		getbfoul(oppfl);
 	}

@@ -112,6 +112,8 @@ public class OldData extends ListActivity {
 						SQLite QQ = new SQLite(OldData.this,"data",null,1);
 						SQLiteDatabase db = QQ.getWritableDatabase();
 						db.execSQL("DROP TABLE IF EXISTS "+table.toString());
+						initListView();
+						setListAdapter(listItemAdapter);
 					}
 				})
 				.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -122,7 +124,7 @@ public class OldData extends ListActivity {
 						dialog.cancel();
 					}
 				}).show();
-				initListView();
+				
 				/*dialog.setTitle("刪除比賽記錄");
 				dialog.setMessage("刪除：\n"+"對手： "+opp+"\n日期： "+time+"\n");
 				dialog.setButton("確定刪除", new DialogInterface.OnClickListener(){

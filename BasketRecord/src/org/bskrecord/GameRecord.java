@@ -5,6 +5,9 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.gesture.GestureLibraries;
+import android.gesture.GestureLibrary;
+import android.gesture.GestureOverlayView;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
@@ -27,6 +30,8 @@ public class GameRecord extends Activity{
 	int twoap,twomd,threeap,threemd,freemd,freeap;
 	int rbs,asts,blks,tos,stls,fls,pts;
 	int sfls=0,oppfls=0;
+	int quater=0;
+	int[] qpoint = new int[8];
 	SQLite qq=null;
 	SQLiteDatabase data = null;
 	SQLiteDatabase data2 = null;
@@ -35,10 +40,16 @@ public class GameRecord extends Activity{
 	String[] Num = new String[16];
 	int teampts = 0,opppts=0;
 	int prestep = 0,style=1;
+	GestureOverlayView gesture;
+	GestureLibrary gestureLibrary;
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.detailpage);
+		gestureLibrary = GestureLibraries.fromRawResource(this, R.raw.gestures);
+        if(!gestureLibrary.load()){
+        	goBack();
+        }
 		Bundle getdata = this.getIntent().getExtras();
 		DisplayMetrics dm = getResources().getDisplayMetrics();
         final int screenWidth = dm.widthPixels;  
@@ -54,6 +65,8 @@ public class GameRecord extends Activity{
 		num = getdata.getString("number");
 		teampts = getdata.getInt("ourpts");
 		opppts = getdata.getInt("opppts");
+		quater = getdata.getInt("quater");
+		qpoint = getdata.getIntArray("qpoint");
 		String[] column = {"selfpts","opppts"};
 		String selection = "number LIKE "+num;
 		team = data2.query(table, column, null, null, null, null, null);
@@ -576,6 +589,8 @@ public class GameRecord extends Activity{
 		tableback.putInt("ourpts", teampts);
 		tableback.putInt("opppts", opppts);
 		tableback.putInt("style", style);
+		tableback.putInt("quater", quater);
+		tableback.putIntArray("apoint", qpoint);
 		Intent back = new Intent();
 		back.putExtras(tableback);
 		back.setClass(GameRecord.this, Recording.class);
