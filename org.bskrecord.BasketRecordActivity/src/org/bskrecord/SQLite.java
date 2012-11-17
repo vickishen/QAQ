@@ -35,6 +35,8 @@ public class SQLite extends SQLiteOpenHelper {
 	public static final String OPPPTS = "opppts";
 	public static final String YEAR = "year";
 	public static final String OPPNAME = "oppname";
+	public static final String HOUR = "hour";
+	public static final String MIN = "min";
 	public SQLite(Context context, String name, CursorFactory factory,int version) {
 		super(context,name,factory,version);
 		this.getWritableDatabase();
@@ -54,7 +56,7 @@ public class SQLite extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + TB_NAME);
 		onCreate(db);
 	}
-	public void addplayer(String name,String number,String tableName,String recordname,int month,int day,int year,String oppname){
+	public void addplayer(String name,String number,String tableName,String recordname,int month,int day,int year,int hour,int min,String oppname){
 		ContentValues values = new ContentValues();
 		values.put(SQLite.NAME, name);
 		values.put(SQLite.NUMBER, number);
@@ -77,6 +79,8 @@ public class SQLite extends SQLiteOpenHelper {
 		values.put(SQLite.SELFPTS, 0);
 		values.put(SQLite.OPPPTS, 0);
 		values.put(SQLite.YEAR, year);
+		values.put(SQLite.HOUR, hour);
+		values.put(SQLite.MIN, min);
 		values.put(SQLite.OPPNAME, oppname);
 		this.getWritableDatabase().insert(tableName,null, values);
 		this.getWritableDatabase().close();
@@ -105,7 +109,9 @@ public class SQLite extends SQLiteOpenHelper {
 				+ DAY + " INTEGER, "
 				+ SELFPTS + " INTEGER, "
 				+ OPPPTS + " INTEGER, "
-				+ YEAR + " INTEGER"
+				+ YEAR + " INTEGER, "
+				+ HOUR + " INTEGER, "
+				+ MIN + " INTEGER"
 				+ ");");
 	}
 	/*public void outputData(){

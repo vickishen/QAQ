@@ -437,6 +437,7 @@ public class Recording extends Activity {
         dd.put(SQLite.SELFPTS, ourpts);
         ha.update(table, dd, null, null);
         ha.close();
+        Toast.makeText(Recording.this, table, Toast.LENGTH_LONG);
         Intent toIndata = new Intent();
         Bundle tname = new Bundle();
         tname.putString("Tablename", table);
@@ -465,7 +466,7 @@ public class Recording extends Activity {
 		selffl=0;
 		TextView wepts = (TextView)findViewById(R.id.ourscore);
 		TextView oppts = (TextView)findViewById(R.id.oppscore);
-		if(quater==0){
+		/*if(quater==0){
 			
 			qpoint[0]=Integer.parseInt(wepts.getText().toString());
 			qpoint[1]=Integer.parseInt(oppts.getText().toString());
@@ -474,7 +475,7 @@ public class Recording extends Activity {
 			qpoint[quater*2]=Integer.parseInt(wepts.getText().toString())-qpoint[(quater-1)*2];
 			qpoint[quater*2+1]=Integer.parseInt(oppts.getText().toString())-qpoint[(quater-1)*2+1];
 		}
-		quater++;
+		quater++;*/
 		getafoul(selffl);
 		getbfoul(oppfl);
 	}

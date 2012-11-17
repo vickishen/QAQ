@@ -46,6 +46,7 @@ public class InsertName extends Activity {
 		}
 	}
 	public void todbCall(View v){
+		if(i>=5){
 		todb();
 		Bundle getopp = this.getIntent().getExtras();
 		String opp="";
@@ -72,6 +73,7 @@ public class InsertName extends Activity {
 		toRecord.setClass(InsertName.this, Recording.class);
 		startActivity(toRecord);
 		InsertName.this.finish();
+		}
 	}
 	@Override
 	public void onBackPressed(){
@@ -89,11 +91,17 @@ public class InsertName extends Activity {
 		String month = Integer.toString(extra.getInt("month"));
 		String day = Integer.toString(extra.getInt ("day"));
 		String recorder = extra.getString("recorder");
-		
-		tableName.append(oppname).append(year).append(month).append(day);
+		int hour = extra.getInt("hour");
+		int min = extra.getInt("min");
+		tableName.append(oppname).append(year).append(month).append(day).append(Integer.toString(hour)).append(Integer.toString(min));
 		QQ.createTable(tableName.toString());
-		for(no=0;no<i;no++){
-			QQ.addplayer(namess[no],numberss[no] , tableName.toString(), recorder, extra.getInt("month"), extra.getInt("day"),extra.getInt("year"),oppname);
+		if(i>=5){
+			for(no=0;no<i;no++){
+				QQ.addplayer(namess[no],numberss[no] , tableName.toString(), recorder, extra.getInt("month"), extra.getInt("day"),extra.getInt("year"),hour,min,oppname);
+			}
+		}
+		else{
+			Toast.makeText(InsertName.this, "人數未滿五人！！", Toast.LENGTH_LONG).show();
 		}
 		QQ.close();
 	}

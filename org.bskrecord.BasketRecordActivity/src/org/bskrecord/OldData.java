@@ -54,11 +54,12 @@ public class OldData extends ListActivity {
 			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
 				// TODO A
-				Toast.makeText(OldData.this, "work!!", Toast.LENGTH_LONG).show();
+				//Toast.makeText(OldData.this, "work!!", Toast.LENGTH_LONG).show();
 				final StringBuilder table = new StringBuilder("");
 				String opp =((TextView)arg1.findViewById(R.id.txt2)).getText().toString();
 				final String time = ((TextView)arg1.findViewById(R.id.txt1)).getText().toString();
 				table.append(opp);
+				table.append(del(time));
 				//AlertDialog dialog = new AlertDialog.Builder(OldData.this).create();
 				new AlertDialog.Builder(OldData.this).setTitle("刪除記錄").setPositiveButton("Delete", new DialogInterface.OnClickListener() {
 					
@@ -84,31 +85,7 @@ public class OldData extends ListActivity {
 						}*/
 						//XP.close();
 						//dialog.cancel();
-						int k=0,end=0,times=0,start=0;
-						char[] arr = time.toCharArray();
-						while(k<time.length()){
-							
-							if(arr[k]=='/'){
-								
-								if(times==0){
-									end=k;
-									for(int f=0;f<end;f++){
-										table.append(arr[f]);
-									}
-									times++;
-								}
-								else{
-									for(int f=end+1;f<k;f++){
-										table.append(arr[f]);
-									}
-									end=k;
-								}
-							}
-								k++;
-						}
-						for(int d=end+1;d<time.length();d++){
-							table.append(arr[d]);
-						}
+						//Toast.makeText(OldData.this, table.toString(), Toast.LENGTH_LONG).show();
 						SQLite QQ = new SQLite(OldData.this,"data",null,1);
 						SQLiteDatabase db = QQ.getWritableDatabase();
 						db.execSQL("DROP TABLE IF EXISTS "+table.toString());
@@ -179,7 +156,7 @@ public class OldData extends ListActivity {
 	        SQLiteDatabase DB = data.getWritableDatabase();
 	        Cursor c = DB.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
 	        
-	        if(c==null){
+	        if(c.getCount()==0){
         		Toast.makeText(OldData.this, "no old data", Toast.LENGTH_LONG).show();
         		Intent it = new Intent();
        		 	it.setClass(OldData.this, BasketRecordActivity.class);
@@ -197,8 +174,9 @@ public class OldData extends ListActivity {
 	        	
 				while (!c.isAfterLast()) {
 					String str = c.getString(0);
+
 					//name[i]=str;
-					Cursor cu = DB.query(str, new String [] {"oppname","day","month","year","opppts","selfpts"}, null, null, null, null, null);
+					Cursor cu = DB.query(str, new String [] {"oppname","day","month","year","hour","min","opppts","selfpts"}, null, null, null, null, null);
 					cu.moveToFirst();
 					//cu.moveToNext();
 					//Log.d("OLDdataRecordname=", Integer.toString(indexRecordname));
@@ -206,11 +184,13 @@ public class OldData extends ListActivity {
 					String Month = Integer.toString(cu.getInt(cu.getColumnIndexOrThrow("month")));
 					String Day = Integer.toString(cu.getInt(cu.getColumnIndexOrThrow("day")));
 					String Year = Integer.toString(cu.getInt(cu.getColumnIndexOrThrow("year")));
+					String hour = Integer.toString(cu.getInt(cu.getColumnIndexOrThrow("hour")));
+					String min  = Integer.toString(cu.getInt(cu.getColumnIndexOrThrow("min")));
 					String opppts = Integer.toString(cu.getInt(cu.getColumnIndexOrThrow("opppts")));
 					String selfpts = Integer.toString(cu.getInt(cu.getColumnIndexOrThrow("selfpts")));
 					HashMap<String, String> map = new  HashMap<String, String>();  
-					num=Year+Month+Day;
-		            map.put( "txt1" ,Year+"/"+ Month+"/"+Day);     //文字
+					num=Year+Month+Day+hour+min;
+		            map.put( "txt1" ,Year+"/"+ Month+"/"+Day+"-"+hour+":"+min);     //文字
 		            map.put( "txt2" , ing);
 		            map.put("txt3", opppts+":"+selfpts);//圖片   
 		            listItems.add(map);
@@ -231,15 +211,16 @@ public class OldData extends ListActivity {
 	                R.layout.listitem,   //ListItem的XML佈局實現  
 	                new  String[] { "txt1" , "txt2","txt3" },      //動態數組與ImageItem對應的子項         
 	                new  int [ ] {R.id.txt1, R.id.txt2,R.id.txt4}       //list_item.xml佈局文件裡面的一個ImageView的ID,一個TextView的ID  
-	        );   
+	        ); 
 	}
 	 protected void onListItemClick(ListView l , View v, int position , long id){
 		 super.onListItemClick(l, v, position, id);
 		 //toast.makeText(getApplicationContext(), ((TextView)v.findViewById(R.id.txt1)).getText().toString(), Toast.LENGTH_SHORT).show();
 		 Intent InData = new Intent();
 		 InData.setClass(OldData.this, Indata.class);
-		 String tablename = ((TextView)v.findViewById(R.id.txt2)).getText().toString()+num;
+		 String tablename = ((TextView)v.findViewById(R.id.txt2)).getText().toString()+del(((TextView)v.findViewById(R.id.txt1)).getText().toString());
 		 //String tableName = ((TextView)v.findViewById(R.id.txt2)).getText().toString()+((TextView)v.findViewById(R.id.txt1)).getText().toString();
+		 //Toast.makeText(OldData.this, tablename, Toast.LENGTH_LONG).show();
 		 Bundle bundle = new Bundle();
 		 bundle.putString("Tablename",tablename);
 		 
@@ -260,21 +241,11 @@ public class OldData extends ListActivity {
 		 char[] repo = str.toCharArray();
 		 StringBuilder ans = new StringBuilder("");
 		 for(int i=0;i<str.length();i++){
-			 if(repo[i]=='/'&&record==0){
-				 start=i+1;
-				 while(repo[start]!='/'){
-					 ans.append(repo[start]);
-					 start++;
-				 }
-				 stop=start+1;
-				 while(stop<(str.length())){
-					 ans.append(repo[stop]);
-					 stop++;
-				 }
-				 break;
+			 if(repo[i]!='/'&&repo[i]!='-'&&repo[i]!=':'){
+				 ans.append(repo[i]);
 			 }
-			 
 		 }
+		 //Toast.makeText(OldData.this, ans.toString(), Toast.LENGTH_LONG).show();
 		 return ans.toString();
 	 }
 	 /*public void hah(View v){

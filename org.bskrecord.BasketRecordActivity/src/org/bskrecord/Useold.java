@@ -40,14 +40,18 @@ public class Useold extends Activity{
 		EditText playernum = (EditText)findViewById(R.id.playerNumber);
 		UseoldFragment data = (UseoldFragment)getFragmentManager().findFragmentById(R.id.master);
 		if(data.po!=-1){
-			data.namearr[data.po]=playername.getText().toString();
+			/*data.namearr[data.po]=playername.getText().toString();
 			data.numarr[data.po]=playernum.getText().toString();
 			data.updatelist(data.i);
 			playername.setText("");
-			playernum.setText("");
+			playernum.setText("");*/
+			int re = 0;
+			for(re=data.po;re<data.numarr.length-1;re++){
+				data.namearr[re] = data.namearr[re+1];
+			}
 		}
 		else{
-			playername.setText("fuck");
+			playername.setText("請選擇要更改的球員!");
 		}
 		//playername.setText(playername.getText().toString()+"ganyour");
 	}
@@ -67,10 +71,12 @@ public class Useold extends Activity{
 		String day = Integer.toString(getdata.getInt ("day"));
 		String recorder = getdata.getString("recorder");
 		int style = getdata.getInt("style");
+		int hour = getdata.getInt("hour");
+		int min = getdata.getInt("min");
 		tableName.append(oppname).append(year).append(month).append(day);
 		QQ.createTable(tableName.toString());
 		for(no=0;no<data.i;no++){
-			QQ.addplayer(data.namearr[no],data.numarr[no] , tableName.toString(), recorder, getdata.getInt("month"), getdata.getInt("day"),getdata.getInt("year"),oppname);
+			QQ.addplayer(data.namearr[no],data.numarr[no] , tableName.toString(), recorder, getdata.getInt("month"), getdata.getInt("day"),getdata.getInt("year"),hour,min,oppname);
 		}
 		QQ.close();
 		Intent toRecord = new Intent();
@@ -100,8 +106,8 @@ public class Useold extends Activity{
 			data.i=data.i+1;
 			data.updatelist(data.i);
 		}
-		else if(playername.getText().toString().length()==0){
-			Toast.makeText(Useold.this, "請填入姓名!!", Toast.LENGTH_SHORT).show();
+		else if(playername.getText().toString().length()==0||playernum.getText().toString().length()==0){
+			Toast.makeText(Useold.this, "請填入姓名和背號!!", Toast.LENGTH_SHORT).show();
 		}
 		else{
 			Toast.makeText(Useold.this, "超過人數上限!!", Toast.LENGTH_LONG).show();

@@ -33,7 +33,7 @@ public class InsertDataFragment extends ListFragment{
 		listItems = new ArrayList<HashMap<String, String>>(); 
 		HashMap<String, String> dsa = new HashMap<String,String>();
 		dsa.put("name", "Name");
-		dsa.put("number", "Number");
+		dsa.put("number", "No.");
 		listItems.add(dsa);
 		int j = 0;
 		while(names[j].length()!=0){
