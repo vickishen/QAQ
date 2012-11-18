@@ -40,20 +40,16 @@ public class Useold extends Activity{
 		EditText playernum = (EditText)findViewById(R.id.playerNumber);
 		UseoldFragment data = (UseoldFragment)getFragmentManager().findFragmentById(R.id.master);
 		if(data.po!=-1){
-			/*data.namearr[data.po]=playername.getText().toString();
-			data.numarr[data.po]=playernum.getText().toString();
-			data.updatelist(data.i);
-			playername.setText("");
-			playernum.setText("");*/
 			int re = 0;
 			for(re=data.po;re<data.numarr.length-1;re++){
 				data.namearr[re] = data.namearr[re+1];
+				data.numarr[re]=data.numarr[re+1];
 			}
+			data.updatelist(data.i);
 		}
 		else{
 			playername.setText("請選擇要更改的球員!");
 		}
-		//playername.setText(playername.getText().toString()+"ganyour");
 	}
 	public void togame(View v){
 		//UseoldFragment getname = (UseoldFragment)find

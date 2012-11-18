@@ -248,45 +248,4 @@ public class OldData extends ListActivity {
 		 //Toast.makeText(OldData.this, ans.toString(), Toast.LENGTH_LONG).show();
 		 return ans.toString();
 	 }
-	 /*public void hah(View v){
-		 //Button buu = (Button)findViewById(R.id.buu);
-		 Intent InData = new Intent();
-	    	InData.setClass(OldData.this, Indata.class);
-	    	startActivity(InData); 
-	 }*/
-	 /*protected void create(File file,String datain){
-	    	File parentPath = file.getParentFile();
-	    	if (!isSDExist()){
-				Toast.makeText(this, 
-						"SD Not Found!", Toast.LENGTH_LONG).show();
-				return;
-			}
-	        try {
-	            if(!parentPath.exists())
-	            	parentPath.mkdirs();
-	            if(file.exists())
-	            	file.delete();
-	            OutputStream os = new FileOutputStream(file);
-	            byte[] data = new byte[datain.length()];
-	            //is.read(data);
-	            os.write(data);
-	            //tvMsg.setText(getString(R.string.saveFileTo) + file.toString());
-	            //is.close();
-	            os.close();  
-	        } catch (IOException e) {
-	            Log.e("ExternalStorageEx", e.toString());
-	        }	
-	        
-	        String[] paths = {file.toString()};
-	        callMediaScanner(paths);
-		}*/
-	 /*private boolean isSDExist() { 
-			String state = Environment.getExternalStorageState();
-			
-			if (state.equals(Environment.MEDIA_MOUNTED))
-				return true;
-			else			
-				return false;		
-		}*/
-	 
 }

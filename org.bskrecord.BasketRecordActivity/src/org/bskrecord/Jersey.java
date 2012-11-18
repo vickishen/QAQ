@@ -21,7 +21,6 @@ public class Jersey extends Activity{
 		blue = (RadioButton)findViewById(R.id.chooseblue);
 		white = (RadioButton)findViewById(R.id.choosewhite);
 		red = (RadioButton)findViewById(R.id.choosered);
-		orange = (RadioButton)findViewById(R.id.chooseorange);
 		green = (RadioButton)findViewById(R.id.choosegreen);
 		
 	
@@ -45,10 +44,6 @@ public class Jersey extends Activity{
 			if(checkedId==white.getId()){
 				style=4;
 			}
-			if(checkedId==orange.getId()){
-				style=5;
-			}
-
 		}
 
     });
