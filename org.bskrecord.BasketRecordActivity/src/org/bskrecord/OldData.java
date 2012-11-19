@@ -61,7 +61,7 @@ public class OldData extends ListActivity {
 				table.append(opp);
 				table.append(del(time));
 				//AlertDialog dialog = new AlertDialog.Builder(OldData.this).create();
-				new AlertDialog.Builder(OldData.this).setTitle("刪除記錄").setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+				new AlertDialog.Builder(OldData.this).setTitle("刪除記錄"+opp+" "+time).setPositiveButton("Delete", new DialogInterface.OnClickListener() {
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {

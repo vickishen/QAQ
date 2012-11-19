@@ -41,10 +41,13 @@ public class Useold extends Activity{
 		UseoldFragment data = (UseoldFragment)getFragmentManager().findFragmentById(R.id.master);
 		if(data.po!=-1){
 			int re = 0;
-			for(re=data.po;re<data.numarr.length-1;re++){
+			data.i=data.i-1;
+			for(re=data.po;re<data.i;re++){
 				data.namearr[re] = data.namearr[re+1];
 				data.numarr[re]=data.numarr[re+1];
 			}
+			playername.setText("");
+			playernum.setText("");
 			data.updatelist(data.i);
 		}
 		else{
@@ -69,7 +72,7 @@ public class Useold extends Activity{
 		int style = getdata.getInt("style");
 		int hour = getdata.getInt("hour");
 		int min = getdata.getInt("min");
-		tableName.append(oppname).append(year).append(month).append(day);
+		tableName.append(oppname).append(year).append(month).append(day).append(Integer.toString(hour)).append(Integer.toString(min));
 		QQ.createTable(tableName.toString());
 		for(no=0;no<data.i;no++){
 			QQ.addplayer(data.namearr[no],data.numarr[no] , tableName.toString(), recorder, getdata.getInt("month"), getdata.getInt("day"),getdata.getInt("year"),hour,min,oppname);
